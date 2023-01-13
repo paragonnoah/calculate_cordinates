@@ -1,0 +1,35 @@
+define NUM_POINTS as 5
+
+define a struct Point with fields:
+  x: integer
+  y: integer
+
+define a function distance with input parameters:
+  point1: Point
+  point2: Point
+and output:
+  double
+
+begin main function
+  define array points as Point with length NUM_POINTS
+  print "Enter the coordinates of the points:"
+  for i from 0 to NUM_POINTS-1
+    print "Point", i+1, ": "
+    read points[i].x
+    read points[i].y
+
+  define crow_flies_distance as double
+  set crow_flies_distance to distance of points[0] and points[NUM_POINTS-1]
+  print "The optional distance between the start and end points is", crow_flies_distance
+
+  define chain_length as double
+  set chain_length to 0
+  for i from 0 to NUM_POINTS-2
+    set chain_length to chain_length + distance of points[i] and points[i+1]
+  print "The distance by meandering is", chain_length
+
+define distance function
+  define output as double
+  set output to square root of:
+    (point1.x - point2.x)^2 + (point1.y - point2.y)^2
+  return output
